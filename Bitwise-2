@@ -1,0 +1,26 @@
+//Extension of Hamming distance---
+//Q=Differenet Bits Sum Pairwise
+int Solution::cntBits(vector<int> &A) {
+    const int MOD = 1e9 + 7;
+    int n = A.size();
+    long long ans = 0;
+
+    for (int bit = 0; bit < 32; bit++) {
+        long long count1 = 0;
+
+        for (int num : A) {
+            if (num & (1 << bit)) {
+                count1++;
+            }
+        }
+
+        long long count0 = n - count1;
+
+        long long contri = (count1 * count0) % MOD;
+        contri = (2 * contri) % MOD;
+
+        ans = (ans + contri) % MOD;
+    }
+
+    return (int)ans;
+}
